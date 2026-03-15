@@ -110,8 +110,13 @@
     </div>
 
     <div class="header-row">
-        <div style="line-height:2">To,<br />The Assistant Commissioner,<br />Land Custom
-            station<br /><strong><u>SONAULI, U.P.</u></strong></div>
+        <div style="line-height:2">To,<br />
+            {% if borderAssistant %}
+            <span style="white-space:pre-line">{{ borderAssistant }}</span>
+            {% else %}
+            The Assistant Commissioner,<br />Land Custom station<br /><strong><u>SONAULI, U.P.</u></strong>
+            {% endif %}
+        </div>
         <div style="font-weight:bold">Date: {{ invoiceDate | default('') }}</div>
     </div>
 

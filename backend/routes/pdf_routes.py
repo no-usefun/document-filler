@@ -132,3 +132,44 @@ def download_stored(document_id: str, form_type: str):
         as_attachment = True,
         download_name = filename,
     )
+
+
+@pdf_bp.delete("/history/<document_id>/<form_type>")
+@jwt_required()
+def delete_pdf_record(document_id: str, form_type: str):
+    """
+    DELETE /api/pdf/history/<document_id>/<form_type>
+    Remove a single form's history entry.
+    """
+    from models.document_model import delete_pdf_record as _delete
+    user_id = get_jwt_identity()
+    deleted = _delete(document_id, form_type, user_id)
+    if not deleted:
+        return jsonify(message="Record not found."), 404
+    return jsonify(message="Deleted."), 200
+
+
+@pdf_bp.delete("/history/<document_id>")
+@jwt_required()
+def delete_voucher_history(document_id: str):
+    """
+    DELETE /api/pdf/history/<document_id>
+    Remove all history for an entire voucher/document.
+    """
+    from models.document_model import delete_voucher_history as _delete_voucher
+    user_id = get_jwt_identity()
+    count   = _delete_voucher(document_id, user_id)
+    return jsonify(message=f"Deleted {count} record(s)."), 200
+
+
+@pdf_bp.delete("/history")
+@jwt_required()
+def clear_all_history():
+    """
+    DELETE /api/pdf/history
+    Remove all PDF history for the current user.
+    """
+    from models.document_model import clear_all_history as _clear
+    user_id = get_jwt_identity()
+    count   = _clear(user_id)
+    return jsonify(message=f"Cleared {count} record(s)."), 200

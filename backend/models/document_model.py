@@ -129,3 +129,28 @@ def _serialize(doc: dict) -> dict:
         if isinstance(val, datetime):
             doc[key] = val.isoformat()
     return doc
+
+
+def delete_pdf_record(document_id: str, form_type: str, user_id: str) -> bool:
+    """Delete a single PDF history record (one form from one voucher)."""
+    result = get_db().pdf_history.delete_one({
+        "document_id": document_id,
+        "form_type":   form_type,
+        "user_id":     user_id,
+    })
+    return result.deleted_count > 0
+
+
+def delete_voucher_history(document_id: str, user_id: str) -> int:
+    """Delete all PDF history records for an entire voucher/document."""
+    result = get_db().pdf_history.delete_many({
+        "document_id": document_id,
+        "user_id":     user_id,
+    })
+    return result.deleted_count
+
+
+def clear_all_history(user_id: str) -> int:
+    """Delete all PDF history for a user."""
+    result = get_db().pdf_history.delete_many({"user_id": user_id})
+    return result.deleted_count
