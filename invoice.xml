@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ENVELOPE>
+  <HEADER>
+    <TALLYREQUEST>Import Data</TALLYREQUEST>
+  </HEADER>
+  <BODY>
+    <IMPORTDATA>
+      <REQUESTDESC>
+        <REPORTNAME>Vouchers</REPORTNAME>
+      </REQUESTDESC>
+      <REQUESTDATA>
+        <TALLYMESSAGE xmlns:UDF="TallyUDF">
+          <VOUCHER Action="Create" VCHTYPE="Sales">
+            <DATE>20250101</DATE>
+            <GUID>unique-guid-for-voucher</GUID>
+            <NARRATION>Sale of goods as per invoice</NARRATION>
+            <VOUCHERTYPENAME>Sales</VOUCHERTYPENAME>
+            <VOUCHERNUMBER>INV-001</VOUCHERNUMBER>
+            <PARTYNAME>Customer ABC</PARTYNAME>
+            <FBTOINDUSTRYTYPE>ProductInvoice</FBTOINDUSTRYTYPE>
+            <!-- Ledger Entries -->
+            <ALLLEDGERENTRIES.LIST>
+              <LEDGERNAME>Customer ABC</LEDGERNAME>
+              <AMOUNT>-1000.00</AMOUNT>
+              <!-- Bill Allocations if needed -->
+            </ALLLEDGERENTRIES.LIST>
+            <ALLLEDGERENTRIES.LIST>
+              <LEDGERNAME>Sales @ 10% GST</LEDGERNAME>
+              <AMOUNT>909.09</AMOUNT>
+            </ALLLEDGERENTRIES.LIST>
+             <ALLLEDGERENTRIES.LIST>
+              <LEDGERNAME>Output CGST @ 5%</LEDGERNAME>
+              <AMOUNT>45.45</AMOUNT>
+            </ALLLEDGERENTRIES.LIST>
+             <ALLLEDGERENTRIES.LIST>
+              <LEDGERNAME>Output SGST @ 5%</LEDGERNAME>
+              <AMOUNT>45.45</AMOUNT>
+            </ALLLEDGERENTRIES.LIST>
+            <!-- Inventory Allocations -->
+            <ALLSTOCKITEMALLOCATIONS.LIST>
+                <STOCKITEMNAME>Product HV20</STOCKITEMNAME>
+                <ACTUALQTY>1 Nos</ACTUALQTY>
+                <RATE>1000.00</RATE>
+                <AMOUNT>1000.00</AMOUNT>
+            </ALLSTOCKITEMALLOCATIONS.LIST>
+          </VOUCHER>
+        </TALLYMESSAGE>
+      </REQUESTDATA>
+    </IMPORTDATA>
+  </BODY>
+</ENVELOPE>

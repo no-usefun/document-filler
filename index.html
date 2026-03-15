@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GST Declaration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div>
+
+        <div class="printable-page">
+
+            <div class="page">
+
+                <h4>THE WEST BENGAL VALUE ADDED TAX RULES, 2005 UNDER GST ACT, 2017</h4>
+                <h2>DECLARATION</h2>
+                <div class="rule">[See Rule 107 (1)]</div>
+
+                <!-- Serial -->
+                <div class="serial">
+                    Serial No:
+                    <input id="serialNo" type="text" style="width:200px;border-bottom:1px solid black;">
+                </div>
+
+                <p>*I/We declare that the following consignment of goods is despatched from a place within West Bengal.
+                </p>
+
+                <table class="form-table">
+
+                    <tr>
+                        <td class="serial-col">1</td>
+                        <td class="label-col">Name, address and Income Tax Permanent Account No. (PAN) of the Consignor
+                        </td>
+                        <td class="input-col">
+                            <textarea id="consignorDetails" rows="3"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="serial-col">2</td>
+                        <td class="label-col">Name, address and Income Tax Permanent Account No. (PAN) of the Consignee
+                        </td>
+                        <td class="input-col">
+                            <textarea id="consigneeDetails" rows="3"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="serial-col">3</td>
+                        <td class="label-col">Place of Despatch</td>
+                        <td class="input-col">
+                            <input id="placeOfDespatch" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="serial-col">4</td>
+                        <td class="label-col">Destination</td>
+                        <td class="input-col">
+                            <input id="destination" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="serial-col">5</td>
+                        <td class="label-col">Description of goods</td>
+                        <td class="input-col">
+                            <input id="descriptionOfGoods" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="serial-col">6</td>
+                        <td class="label-col">Quantity</td>
+                        <td class="input-col">
+                            <input id="quantity" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="serial-col">7</td>
+                        <td class="label-col">Value and / or rate</td>
+                        <td class="input-col">
+                            <input id="valueRate1" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="serial-col">8</td>
+                        <td class="label-col">Weight</td>
+                        <td class="input-col">
+                            <input id="weight" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="serial-col">9</td>
+                        <td class="label-col">Value and / or rate</td>
+                        <td class="input-col">
+                            <input id="valueRate2" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="serial-col">10</td>
+                        <td class="label-col">Consignment Note or Delivery Note No. and Date of Challan No. and Date
+                        </td>
+                        <td class="input-col">
+                            <input id="consignmentNoteDetails" type="text">
+                        </td>
+                    </tr>
+
+                </table>
+
+                <!-- Declaration -->
+
+                <div class="declaration">
+
+                    <p>
+                        *I/We declare that I/We* hold/do not hold GST Certificate of Registration bearing No.
+                        <input id="gstCertificateNumber" type="text" class="inline-input">
+
+                        under the West Bengal Value Added Tax Act, 2003 (West Ben. Act.....of 2003).
+
+                        GST no.
+                        <input id="gstNumber" type="text" class="inline-input">
+                    </p>
+
+                    <p>
+                        *I/We* have/have not Manufactured the goods in West Bengal/not transported the goods from
+                        outside West Bengal.
+                    </p>
+
+                    <p>
+                        The above statement is true to the best of my/our knowledge and belief.
+                    </p>
+
+                </div>
+
+                <!-- Signature + Date -->
+
+                <div class="signature">
+
+                    <div class="date-field">
+                        Date :
+                        <input id="declarationDate" type="text" class="date-input">
+                    </div>
+
+                    <div class="signature-area">
+
+                        <label for="signatureUpload" class="signature-box">
+                            <img id="signaturePreview">
+                            <span id="signatureText">Click to upload signature</span>
+                        </label>
+
+                        <div class="signature-label">
+                            Signature & Status of the Declarant
+                        </div>
+
+                        <input id="signatureUpload" type="file" accept="image/*">
+
+                    </div>
+
+                </div>
+
+                <!-- Notes -->
+
+                <div class="note">
+
+                    <p>
+                        N.B. : (1) The declaration should bear a consecutive Serial No. issued by the officer at the
+                        consignor giving the declaration and a true copy of the same should be retained by him.
+                    </p>
+
+                    <p>
+                        (2) *Strike out whichever is not applicable.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="no-print" id="downloadPDF">Download PDF</button>
+        <input type="file" id="xmlUpload" accept=".xml">
+
+    </div>
+
+    <!-- Libraries -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
