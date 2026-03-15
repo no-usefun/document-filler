@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 12px;
+            font-size: 13px;
             color: #000;
         }
 
@@ -17,181 +17,114 @@
             margin-bottom: 16px;
         }
 
-        .company-name {
+        .company {
             font-size: 28px;
             font-weight: bold;
             font-family: 'Times New Roman', serif;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
         }
 
-        .company-addr {
+        .addr {
             font-size: 11px;
             margin-top: 4px;
-            line-height: 1.6;
-        }
-
-        .company-contact {
-            font-size: 11px;
-            margin-top: 4px;
-        }
-
-        .date-line {
-            font-weight: bold;
-            margin-bottom: 12px;
-            font-size: 12px;
-        }
-
-        .to-block {
-            margin-bottom: 14px;
-            font-size: 12px;
             line-height: 1.7;
         }
 
-        .subject-title {
+        .subject {
             text-align: center;
             font-weight: bold;
             text-decoration: underline;
-            font-size: 13px;
-            margin: 14px 0 10px 0;
-        }
-
-        .body-text {
-            font-size: 12px;
-            line-height: 2;
-        }
-
-        .invoice-ref {
-            font-weight: bold;
-            text-decoration: underline;
-        }
-
-        .item-block {
-            margin: 10px 0 6px 30px;
-            font-size: 12px;
-            line-height: 1.9;
+            font-size: 15px;
+            margin-bottom: 14px;
         }
 
         .item-row {
             font-weight: bold;
+            line-height: 2;
         }
 
-        .item-sub {
-            margin-left: 30px;
+        .item-desc {
+            margin-left: 28px;
+            font-size: 12px;
+            font-weight: normal;
+            line-height: 1.7;
         }
 
         .total-line {
             font-weight: bold;
             text-decoration: underline;
-            margin-top: 6px;
-            font-size: 12px;
+            margin: 8px 0 16px 0;
         }
 
-        .closing-text {
-            margin-top: 14px;
-            font-size: 12px;
-            line-height: 1.9;
-        }
-
-        .sig-block {
-            margin-top: 14px;
-            font-size: 12px;
-        }
-
-        .sig-stamp-area {
-            margin-top: 70px;
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        .sig-box {
-            min-width: 200px;
-            text-align: center;
-        }
-
-        .sig-label {
-            font-size: 11px;
+        .sig-line {
             border-top: 1px solid #000;
-            padding-top: 3px;
+            padding-top: 4px;
+            font-size: 11px;
+            text-align: center;
+            display: inline-block;
+            min-width: 200px;
+            margin-top: 0;
         }
     </style>
 </head>
 
 <body>
-
     <div class="letterhead">
-        <div class="company-name">R . K . T R A D E R S</div>
-        <div class="company-addr">
-            219/B, OLD CHINA BAZAR STREET,<br />
-            1<sup>ST</sup> FLOOR, ROOM NO. – B<br />
-            KOLKATA – 700 001. (W.B.)
-        </div>
-        <div class="company-contact">
-            Phone No. – 0091– 33 – 46022533,<br />
-            Call No. – 0091 – 7044676599<br />
-            Email ID: – rkt_kol1977@yahoo.in
-        </div>
+        <div class="company">R . K . T R A D E R S</div>
+        <div class="addr">219/B, OLD CHINA BAZAR STREET,<br />1<sup>ST</sup> FLOOR, ROOM NO. – B<br />KOLKATA – 700 001.
+            (W.B.)</div>
+        <div class="addr">Phone No. – 0091– 33 – 46022533,<br />Call No. – 0091 – 7044676599<br />Email ID: – <a
+                href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                data-cfemail="bcced7c8e3d7d3d08d858b8bfcc5ddd4d3d392d5d2">[email&#160;protected]</a></div>
     </div>
 
-    <div class="date-line">DATE: {{ invoiceDate or '' }}</div>
+    <div class="subject">PACKING DETAILS</div>
 
-    <div class="to-block">
-        M/S. {{ consignee or '' }}<br />
-        {{ consigneeAddress or '' }}
+    <p style="font-weight:bold;margin-bottom:14px">DATE: {{ invoiceDate | default('') }}</p>
+
+    <div style="margin-bottom:14px;line-height:1.8">
+        <strong>M/S. {{ consignee | default('') }}</strong><br />
+        <span style="white-space:pre-wrap">{{ consigneeAddress | default('') }}</span>
     </div>
 
-    <div style="font-size:12px;margin-bottom:6px">Dear Sir,</div>
+    <p style="margin-bottom:12px">Dear Sir,</p>
 
-    <div class="subject-title">PACKING DETAILS</div>
-
-    <div class="body-text">
-        <p>
-            TAX Invoice NO.
-            <span class="invoice-ref">{{ voucherNumber or '' }}</span>
-            DT. {{ invoiceDate or '' }} for IRs. <span class="invoice-ref">{{ totalAmount or '' }}/- only.</span>
-        </p>
-        <p style="font-weight:bold;text-decoration:underline;margin-top:4px">
-            TOTAL- {{ totalPackages or '' }}
-        </p>
+    <div style="line-height:2;margin-bottom:10px">
+        TAX Invoice NO. <strong><u>{{ voucherNumber | default('') }}</u></strong>
+        DT. {{ invoiceDate | default('') }}
+        for IRs. <strong><u>{{ totalAmount | default('') }}/- only.</u></strong>
     </div>
 
-    <!-- Items list -->
-    <div class="item-block">
+    {% if totalPackages %}<p style="font-weight:bold;text-decoration:underline;margin-bottom:12px">TOTAL- {{
+        totalPackages }}</p>{% endif %}
+
+    <div style="margin-left:16px;margin-bottom:12px">
         {% for item in items %}
-        <div class="item-row">
-            {{ "%02d" | format(loop.index) }}.) {{ item.quantity }} – {{ item.name }}
-            {% if item.description and item.description != item.name %}
-            – {{ item.description }}
-            {% endif %}
-        </div>
+        <div class="item-row">{{ "%02d"|format(loop.index) }}.) {{ item.quantity }} – {{ item.name }}</div>
+        {% if item.description and item.description != item.name %}
+        <div class="item-desc">{{ item.description }}</div>
+        {% endif %}
+        {% else %}
+        <div style="color:#aaa">No items</div>
         {% endfor %}
     </div>
 
+    {% if totalQty or weightApprox %}
     <div class="total-line">
-        TOTAL QTY. &amp; WEIGHT AS PER PACKING LIST
+        {% if totalPackages %}{{ totalPackages }} – {% endif %}
+        TOTAL QTY. {% if totalQty %}{{ totalQty }}{% endif %}
+        {% if totalQty and weightApprox %} &amp; {% endif %}
+        {% if weightApprox %}WEIGHT APPROX. – {{ weightApprox }}{% endif %}
+    </div>
+    {% elif items %}
+    <div class="total-line">TOTAL QTY. &amp; WEIGHT AS PER PACKING LIST</div>
+    {% endif %}
+
+    <div style="line-height:2;margin-bottom:12px">
+        <p>Please acknowledgement receipt and send us Custom clearance certificate along with Bill of Export also for
+            the same at your earliest.</p>
+        <p style="margin-top:8px">Thanking you and assuring to you our best services all the times, we are,<br />Very
+            truly yours,</p>
     </div>
 
-    <div class="closing-text">
-        <p>
-            Please acknowledgement receipt and send us Custom clearance certificate along
-            with Bill of Export also for the same at your earliest.
-        </p>
-        <p style="margin-top:8px">
-            Thanking you and assuring to you our best services all the times, we are,<br />
-            Very truly yours,
-        </p>
-    </div>
-
-    <div class="sig-block">
-        <p style="font-weight:bold">For R. K. TRADERS</p>
-        <div class="sig-stamp-area">
-            <div class="sig-box">
-                <!-- generous space for signature and stamp -->
-                <div style="height:80px;"></div>
-                <div class="sig-label">Authorised Signatory</div>
-            </div>
-        </div>
-    </div>
-
-</body>
-
-</html>
+    <p style="font-weight:bold;font-size:15px">F

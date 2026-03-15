@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 12px;
+            font-size: 13px;
             color: #000;
         }
 
@@ -17,135 +17,86 @@
             margin-bottom: 18px;
         }
 
-        .company-name {
+        .company {
             font-size: 28px;
             font-weight: bold;
             font-family: 'Times New Roman', serif;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
         }
 
-        .company-addr {
+        .addr {
             font-size: 11px;
             margin-top: 4px;
-            line-height: 1.6;
-        }
-
-        .company-contact {
-            font-size: 11px;
-            margin-top: 4px;
-        }
-
-        .date-line {
-            margin-bottom: 14px;
-            font-size: 12px;
-        }
-
-        .to-block {
-            margin-bottom: 18px;
-            font-size: 12px;
-            line-height: 1.8;
-        }
-
-        .to-block .to-name {
-            font-weight: bold;
-            text-decoration: underline;
+            line-height: 1.7;
         }
 
         .subject {
             text-align: center;
             font-weight: bold;
             text-decoration: underline;
-            font-size: 13px;
+            font-size: 15px;
             margin: 16px 0;
         }
 
         .body-text {
-            font-size: 12px;
-            line-height: 1.9;
+            font-size: 13px;
+            line-height: 2;
             text-align: justify;
         }
 
-        .body-text .invoice-ref {
-            font-weight: bold;
+        .ul {
             text-decoration: underline;
+            font-weight: bold;
         }
 
-        .sig-block {
-            margin-top: 30px;
-            font-size: 12px;
+        .sig-area {
+            margin-top: 60px;
         }
 
-        .sig-stamp-area {
-            margin-top: 80px;
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        .sig-box {
-            min-width: 200px;
-        }
-
-        .sig-label {
-            font-size: 11px;
+        .sig-line {
             border-top: 1px solid #000;
             padding-top: 4px;
+            font-size: 11px;
             text-align: center;
             margin-top: 0;
+            min-width: 200px;
+            display: inline-block;
         }
     </style>
 </head>
 
 <body>
-
     <div class="letterhead">
-        <div class="company-name">R . K . T R A D E R S</div>
-        <div class="company-addr">
-            219/B, OLD CHINA BAZAR STREET,<br />
-            1<sup>ST</sup> FLOOR, ROOM NO. – 8,<br />
-            KOLKATA – 700 001. (W.B.)
-        </div>
-        <div class="company-contact">
-            Phone No. – 0091– 33 – 46022533.<br />
-            Cell No. – 0091 – 7044676599.<br />
-            Email ID: – rkt_kol1977@yahoo.in
-        </div>
+        <div class="company">R . K . T R A D E R S</div>
+        <div class="addr">219/B, OLD CHINA BAZAR STREET,<br />1<sup>ST</sup> FLOOR, ROOM NO. – 8,<br />KOLKATA – 700
+            001. (W.B.)</div>
+        <div class="addr">Phone No. – 0091– 33 – 46022533.<br />Cell No. – 0091 – 7044676599.<br />Email ID: –
+            rkt_kol1977@yahoo.in</div>
     </div>
 
-    <div class="date-line">DATE: - {{ invoiceDate or '' }}</div>
+    <p style="margin-bottom:16px"><strong>DATE: -</strong> {{ invoiceDate | default('') }}</p>
 
-    <div class="to-block">
-        To,<br />
-        The Deputy Commissioner<br />
-        <span class="to-name">LCS SONAULI.</span>
+    <div style="margin-bottom:18px;line-height:2">
+        To,<br />The Deputy Commissioner<br /><strong><u>LCS SONAULI.</u></strong>
     </div>
 
-    <p style="margin-bottom:6px">Dear Sir,</p>
+    <p style="margin-bottom:12px">Dear Sir,</p>
 
     <div class="subject">TO WHOM IT MAY CONCERN</div>
 
     <div class="body-text">
-        <p>
-            AS PER THE END USE CRITERIA THE GOODS UNDER THE INVOICE NO.: –
-            <span class="invoice-ref">{{ voucherNumber or '' }} DATED {{ invoiceDate or '' }}.</span>
-            DOES NOT FALL UNDER ANY CATEGORY OF SCOMET LIST – Refer to category 4 (4A013) of Appendix 3 of the
-            SCOMET list and are going to be used exclusively for consumer or to be used in the industry
-            producing consumer goods.
-        </p>
+        AS PER THE END USE CRITERIA THE GOODS UNDER THE INVOICE NO.: –
+        <span class="ul">{{ voucherNumber | default('') }} DATED {{ invoiceDate | default('') }}.</span>
+        DOES NOT FALL UNDER ANY CATEGORY OF SCOMET LIST – Refer to category 4 (4A013) of Appendix 3 of the SCOMET list
+        and are going to be used exclusively for consumer or to be used in the industry producing consumer goods.
     </div>
 
-    <div class="sig-block">
-        <p>Thank you,</p>
+    <p style="margin-top:20px">Thank you,</p>
+    <p style="font-weight:bold;margin-top:6px">For R. K. TRADERS</p>
 
-        <div class="sig-stamp-area">
-            <div class="sig-box">
-                <div style="font-weight:bold;margin-bottom:4px">For R. K. TRADERS</div>
-                <!-- Space for signature and stamp -->
-                <div style="height:80px;"></div>
-                <div class="sig-label">Authorised Signatory</div>
-            </div>
-        </div>
+    <div class="sig-area">
+        <div class="sig-line">Authorised Signatory</div>
     </div>
-
 </body>
 
 </html>

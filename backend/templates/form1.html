@@ -6,134 +6,113 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 11px;
+            font-size: 12px;
             color: #000;
-            margin: 0;
-            padding: 0;
         }
 
         .outer {
-            border: 1px solid #000;
-            padding: 10px 14px;
+            border: 1.5px solid #000;
+            padding: 12px 16px;
+            min-height: 250mm;
+            display: flex;
+            flex-direction: column;
         }
 
-        h4 {
+        .center {
             text-align: center;
-            margin: 0 0 2px 0;
-            font-size: 11px;
-            font-weight: normal;
         }
 
-        h2 {
-            text-align: center;
-            margin: 4px 0;
-            font-size: 16px;
+        .bold {
             font-weight: bold;
-            letter-spacing: 1px;
         }
 
-        .rule {
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 11px;
+        .underline {
+            text-decoration: underline;
         }
 
-        .serial-row {
+        .right {
             text-align: right;
-            margin-bottom: 8px;
-            font-size: 11px;
         }
 
-        .serial-val {
-            display: inline-block;
-            min-width: 80px;
-            border-bottom: 1px solid #000;
-        }
-
-        .opening {
-            margin-bottom: 8px;
-            font-size: 11px;
+        .italic {
+            font-style: italic;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 11px;
         }
 
         td {
             border: 1px solid #000;
-            padding: 5px 7px;
+            padding: 6px 8px;
             vertical-align: top;
+            font-size: 12px;
         }
 
-        .num {
+        .num-col {
             width: 28px;
             text-align: center;
             font-weight: bold;
         }
 
-        .label {
-            width: 42%;
+        .label-col {
+            width: 44%;
+            font-weight: bold;
         }
 
         .val {
             white-space: pre-wrap;
             word-wrap: break-word;
-            line-height: 1.5;
+            min-height: 30px;
         }
 
         .decl {
-            margin-top: 10px;
-            font-size: 11px;
-            line-height: 1.7;
+            margin-top: 12px;
+            font-size: 12px;
+            line-height: 1.9;
         }
 
-        .gst-inline {
+        .inline-blank {
             display: inline-block;
             min-width: 60px;
             border-bottom: 1px solid #000;
         }
 
-        .gst-inline-lg {
-            display: inline-block;
-            min-width: 160px;
-            border-bottom: 1px solid #000;
-            font-weight: bold;
-        }
-
-        .sig-area {
+        .sig-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-top: 40px;
+            margin-top: 30px;
         }
 
-        .sig-right {
+        .sig-box {
             text-align: center;
             min-width: 200px;
         }
 
-        .sig-box {
-            border-top: 1px solid #000;
-            margin-top: 60px;
-            padding-top: 4px;
-            font-size: 10px;
-            text-align: center;
+        .stamp-space {
+            height: 70px;
+            border: 1px dashed #ccc;
+            margin-bottom: 6px;
         }
 
-        .date-val {
-            display: inline-block;
-            min-width: 100px;
-            border-bottom: 1px solid #000;
+        .sig-label {
+            border-top: 1px solid #000;
+            padding-top: 4px;
+            font-size: 11px;
+        }
+
+        .spacer {
+            flex: 1;
         }
 
         .note {
             border-top: 1px solid #000;
-            margin-top: 14px;
-            padding-top: 6px;
+            margin-top: 16px;
+            padding-top: 8px;
             font-size: 10px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
     </style>
 </head>
@@ -141,87 +120,87 @@
 <body>
     <div class="outer">
 
-        <h4>THE WEST BENGAL VALUE ADDED TAX RULES, 2005 UNDER GST ACT, 2017</h4>
-        <h2>DECLARATION</h2>
-        <div class="rule">[ See Rule 107 (1) ]</div>
+        <div class="center" style="font-size:12px">THE WEST BENGAL VALUE ADDED TAX RULES, 2005 UNDER GST ACT, 2017</div>
+        <div class="center bold" style="font-size:20px;letter-spacing:2px;margin:5px 0">DECLARATION</div>
+        <div class="center" style="margin-bottom:10px">[ See Rule 107 (1) ]</div>
 
-        <div class="serial-row">
-            Serial No. <span class="serial-val">{{ serialNo or '' }}</span>
+        <div class="right" style="margin-bottom:8px">
+            Serial No. <span class="inline-blank">{{ serialNo | default('') }}</span>
         </div>
 
-        <p class="opening">
+        <p class="center italic" style="margin-bottom:10px">
             *I/We declare that the following consignment of goods is despatched from a place within West Bengal.
         </p>
 
         <table>
             <tr>
-                <td class="num">1.</td>
-                <td class="label">Name, address and Income Tax Permanent Account No. (PAN) of the Consignor</td>
+                <td class="num-col">1.</td>
+                <td class="label-col">Name, address and Income Tax Permanent Account No. (PAN) of the Consignor</td>
                 <td>
-                    <div class="val">{{ consignorDetails or '' }}</div>
+                    <div class="val">{{ consignorDetails | default('') }}</div>
                 </td>
             </tr>
             <tr>
-                <td class="num">2.</td>
-                <td class="label">Name, address and Income Tax Permanent Account No. (PAN) of the Consignee</td>
+                <td class="num-col">2.</td>
+                <td class="label-col">Name, address and Income Tax Permanent Account No. (PAN) of the Consignee</td>
                 <td>
-                    <div class="val">{{ consigneeDetails or '' }}</div>
+                    <div class="val">{{ consigneeDetails | default('') }}</div>
                 </td>
             </tr>
             <tr>
-                <td class="num">3.</td>
-                <td class="label">Place of Despatch</td>
+                <td class="num-col">3.</td>
+                <td class="label-col">Place of Despatch</td>
                 <td>
-                    <div class="val">{{ placeOfDespatch or '' }}</div>
+                    <div class="val">{{ placeOfDespatch | default('') }}</div>
                 </td>
             </tr>
             <tr>
-                <td class="num">4.</td>
-                <td class="label">Destination</td>
+                <td class="num-col">4.</td>
+                <td class="label-col">Destination</td>
                 <td>
-                    <div class="val">{{ destination or '' }}</div>
+                    <div class="val">{{ destination | default('') }}</div>
                 </td>
             </tr>
             <tr>
-                <td class="num">5.</td>
-                <td class="label">Description of goods</td>
+                <td class="num-col">5.</td>
+                <td class="label-col">Description of goods</td>
                 <td>
-                    <div class="val">{{ descriptionOfGoods or '' }}</div>
+                    <div class="val">{{ descriptionOfGoods | default('') }}</div>
                 </td>
             </tr>
             <tr>
-                <td class="num">6.</td>
-                <td class="label">Quantity</td>
+                <td class="num-col">6.</td>
+                <td class="label-col">Quantity</td>
                 <td>
-                    <div class="val">{{ quantity or '' }}</div>
+                    <div class="val">{{ quantity | default('') }}</div>
                 </td>
             </tr>
             <tr>
-                <td class="num">7.</td>
-                <td class="label">Value and / or rate</td>
+                <td class="num-col">7.</td>
+                <td class="label-col">Value and / or rate</td>
                 <td>
-                    <div class="val">{{ valueRate or '' }}</div>
+                    <div class="val">{{ valueRate | default('') }}</div>
                 </td>
             </tr>
             <tr>
-                <td class="num">8.</td>
-                <td class="label">Weight</td>
+                <td class="num-col">8.</td>
+                <td class="label-col">Weight</td>
                 <td>
-                    <div class="val">{{ weight or '' }}</div>
+                    <div class="val">{{ weight | default('') }}</div>
                 </td>
             </tr>
             <tr>
-                <td class="num">9.</td>
-                <td class="label">Value and / or rate</td>
+                <td class="num-col">9.</td>
+                <td class="label-col">Value and / or rate</td>
                 <td>
-                    <div class="val">{{ valueRate2 or '' }}</div>
+                    <div class="val">{{ valueRate2 | default('') }}</div>
                 </td>
             </tr>
             <tr>
-                <td class="num">10.</td>
-                <td class="label">*Consignment Note or Delivery Note No. and Date of Challan No. and Date</td>
+                <td class="num-col">10.</td>
+                <td class="label-col">*Consignment Note or Delivery Note No. and Date of Challan No. and Date</td>
                 <td>
-                    <div class="val">{{ consignmentNote or '' }}</div>
+                    <div class="val">{{ consignmentNote | default('') }}</div>
                 </td>
             </tr>
         </table>
@@ -229,25 +208,26 @@
         <div class="decl">
             <p>
                 *I/We declare that I/We* hold/do not hold GST Certificate of Registration bearing No.
-                <span class="gst-inline">{{ gstCertificateNumber or '' }}</span>
+                <span class="inline-blank">{{ gstCertificateNumber | default('') }}</span>
                 under the West Bengal Value Added Tax Act, 2003 (West Ben. Act....of 2003).
-                <strong>GST # <span class="gst-inline-lg">{{ consigneeGSTIN or '' }}</span></strong>
+                <strong>GST # <span style="border-bottom:1px solid #000;min-width:140px;display:inline-block">{{
+                        consigneeGSTIN | default('19ACXPA0890P1ZS') }}</span></strong>
             </p>
-            <p style="margin-top:6px">
-                *I/We* have/have not Manufactured the goods in West Bengal/not transported the goods from outside West
-                Bengal.
-            </p>
-            <p style="margin-top:6px">The above statement is true to the best of my/our knowledge and belief.</p>
+            <p style="margin-top:8px">*I/We* have/have not Manufactured the goods in West Bengal/not transported the
+                goods from outside West Bengal.</p>
+            <p style="margin-top:8px">The above statement is true to the best of my/our knowledge and belief.</p>
         </div>
 
-        <!-- Signature area with generous space for stamp -->
-        <div class="sig-area">
-            <div style="font-size:11px">
-                Date :- <span class="date-val">{{ invoiceDate or '' }}</span>
-            </div>
-            <div class="sig-right">
-                <div style="font-size:11px;font-weight:bold">{{ consignor or 'R. K. TRADERS' }}</div>
-                <div class="sig-box">Signature &amp; Status of the Declarant</div>
+        <div class="spacer"></div>
+
+        <div class="sig-row">
+            <div style="font-size:12px">Date :- <span
+                    style="border-bottom:1px solid #000;display:inline-block;min-width:110px">{{ invoiceDate |
+                    default('') }}</span></div>
+            <div class="sig-box">
+                <div class="bold" style="margin-bottom:6px">{{ consignor | default('R. K. TRADERS') }}</div>
+                <div class="stamp-space"></div>
+                <div class="sig-label">Signature &amp; Status of the Declarant</div>
             </div>
         </div>
 

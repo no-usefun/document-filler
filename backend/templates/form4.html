@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 12px;
+            font-size: 13px;
             color: #000;
         }
 
@@ -14,135 +14,86 @@
             text-align: center;
             border-bottom: 1px solid #000;
             padding-bottom: 8px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
-        .company-name {
+        .company {
             font-size: 26px;
             font-weight: bold;
             font-family: 'Times New Roman', serif;
             letter-spacing: 3px;
         }
 
-        .company-addr {
+        .addr {
             font-size: 11px;
             margin-top: 3px;
-            line-height: 1.5;
-        }
-
-        .company-phone {
-            font-size: 10px;
-            text-decoration: underline;
-            margin-top: 2px;
+            line-height: 1.6;
         }
 
         .header-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
-        .to-block {
-            line-height: 1.8;
-            font-size: 12px;
-        }
-
-        .to-name {
+        .re {
             font-weight: bold;
             text-decoration: underline;
+            margin-bottom: 12px;
         }
 
-        .date-right {
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .re-line {
-            font-weight: bold;
-            text-decoration: underline;
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-
-        .salutation {
-            margin-bottom: 8px;
-        }
-
-        .auth-line {
-            margin-bottom: 6px;
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
-            flex-wrap: wrap;
+        .body-line {
+            line-height: 2.1;
+            margin-bottom: 2px;
         }
 
         .blank {
             display: inline-block;
-            min-width: 160px;
+            min-width: 120px;
             border-bottom: 1px solid #000;
         }
 
-        .blank-sm {
+        .blank-lg {
             display: inline-block;
-            min-width: 80px;
+            min-width: 200px;
             border-bottom: 1px solid #000;
         }
 
-        .bold-ul {
+        .ul-bold {
             font-weight: bold;
             text-decoration: underline;
         }
 
-        .details-block {
-            margin: 10px 0;
-            font-size: 12px;
+        .detail-line {
             line-height: 2;
         }
 
-        .details-block .detail-line {
-            display: flex;
-        }
-
-        .details-block .detail-label {
-            min-width: 200px;
-        }
-
-        .detail-val {
-            font-weight: bold;
-            text-decoration: underline;
-        }
-
-        .closing {
-            margin-top: 10px;
-            font-size: 12px;
-            line-height: 1.8;
-        }
-
         .sig-area {
-            margin-top: 16px;
             display: flex;
-            gap: 60px;
+            gap: 30px;
             align-items: flex-end;
-            font-size: 11px;
+            margin-top: 30px;
         }
 
         .sig-col {
+            flex: 1;
             text-align: center;
         }
 
         .sig-space {
-            height: 75px;
+            height: 70px;
+            border-bottom: 1px solid #000;
         }
 
-        .sig-label-line {
-            border-top: 1px solid #000;
+        .sig-label {
+            font-size: 11px;
             padding-top: 3px;
         }
 
-        .mandatory-note {
+        .mandatory {
             text-align: center;
-            font-size: 11px;
             font-weight: bold;
+            font-size: 12px;
             margin-top: 12px;
             border-top: 1px solid #000;
             padding-top: 6px;
@@ -151,92 +102,61 @@
 </head>
 
 <body>
-
     <div class="letterhead">
-        <div class="company-name">R.K.TRADERS</div>
-        <div class="company-addr">
-            219/B, OLD CHINA BAZAR STREET<br />
-            KOLKATA – 700 001
+        <div class="company">R.K.TRADERS</div>
+        <div class="addr">219/B, OLD CHINA BAZAR STREET<br />KOLKATA – 700 001</div>
+        <div style="font-size:10px;text-decoration:underline;margin-top:2px">PHONE – 0091-7044676599 / 033-46018237
         </div>
-        <div class="company-phone">PHONE – 0091-7044676599 / 033-46018237</div>
     </div>
 
     <div class="header-row">
-        <div class="to-block">
-            To,<br />
-            The Assistant Commissioner,<br />
-            Land Custom station<br />
-            <span class="to-name">SONAULI, U.P.</span>
-        </div>
-        <div class="date-right">Date: {{ invoiceDate or '' }}</div>
+        <div style="line-height:2">To,<br />The Assistant Commissioner,<br />Land Custom
+            station<br /><strong><u>SONAULI, U.P.</u></strong></div>
+        <div style="font-weight:bold">Date: {{ invoiceDate | default('') }}</div>
     </div>
 
-    <div class="re-line">RE: - CLEARING AGENT AUTHORIZATION LETTER</div>
+    <div class="re">RE: - CLEARING AGENT AUTHORIZATION LETTER</div>
+    <p style="margin-bottom:10px">Respected Sir / Ma'am,</p>
 
-    <p class="salutation">Respected Sir / Ma'am,</p>
-
-    <div style="font-size:12px; line-height:2;">
-        <div class="auth-line">
-            We hereby authorize to Mr. <span class="blank"></span> (Custom House Agent)
-        </div>
-        <div class="auth-line">
-            CHA License No. , <span class="blank"></span> , SONAULI to carry out all
-        </div>
-        <div class="auth-line">
-            clearance of cargo along with all custom related work from Indian custom on behalf of
-        </div>
-        <div class="auth-line">
-            M/S. <span class="bold-ul">R.K.TRADERS</span> , IEC Code No. <span class="bold-ul">0206017863</span>
-        </div>
+    <div class="body-line">We hereby authorize to Mr. <span class="blank-lg"></span> (Custom House Agent)</div>
+    <div class="body-line">CHA License No. , <span class="blank"></span> , <span class="blank"></span> , SONAULI to
+        carry out all</div>
+    <div class="body-line">clearance of cargo along with all custom related work from Indian custom on behalf of</div>
+    <div class="body-line">M/S. <strong><u>R.K.TRADERS</u></strong> , IEC Code No. <strong><u>0206017863</u></strong>
     </div>
 
-    <div class="details-block">
-        <p style="margin-bottom:4px">The details of shipment will be as given below; : -</p>
-        <div class="detail-line">
-            <span class="detail-label">BL Number / LC No:-</span>
-        </div>
-        <div class="detail-line">
-            <span class="detail-label">Company Name:-</span>
-            <span class="detail-val">{{ consignee or '' }}</span>
-        </div>
-        <div class="detail-line">
-            <span class="detail-label">Invoice Number &amp; Date:-</span>
-            <span class="detail-val">{{ voucherNumber or '' }} DT. {{ invoiceDate or '' }}.</span>
-        </div>
-        <div class="detail-line">
-            <span class="detail-label">Quantity:-</span>
-            <span class="detail-val">{{ quantity or '' }}</span>
-        </div>
-        <div class="detail-line">
-            <span class="detail-label">Package:-</span>
-            <span class="detail-val">{{ descriptionOfGoods or '' }}</span>
-        </div>
+    <div style="margin-top:12px">
+        <div class="detail-line">The details of shipment will be as given below; : -</div>
+        <div class="detail-line">BL Number / LC No:-</div>
+        <div class="detail-line">Company Name:- <span class="ul-bold">{{ consignee | default('') }}</span></div>
+        <div class="detail-line">Invoice Number &amp; Date:- <span class="ul-bold">{{ voucherNumber | default('') }} DT.
+                {{ invoiceDate | default('') }}.</span></div>
+        <div class="detail-line">Quantity: - <span class="ul-bold">{{ quantity | default('') }}</span></div>
+        <div class="detail-line">Package:- <span class="ul-bold">{{ descriptionOfGoods | default('') }}</span></div>
     </div>
 
-    <div class="closing">
+    <div style="margin-top:16px;line-height:1.9">
         <p>Please accord them with the necessary assistance for clearance of the goods.</p>
         <p>Thank you for your co-operation,</p>
     </div>
+    <p style="margin-top:10px">Yours Faithfully,</p>
 
     <div class="sig-area">
         <div class="sig-col">
             <div class="sig-space"></div>
-            <div class="sig-label-line">First Name Last Name<br />Designation<br /><strong>COMPANY STAMP</strong></div>
+            <div class="sig-label">First Name Last Name<br />Designation<br /><strong>COMPANY STAMP</strong></div>
         </div>
         <div class="sig-col">
             <div class="sig-space"></div>
-            <div class="sig-label-line">For R. K. TRADERS</div>
+            <div class="sig-label">For R. K. TRADERS</div>
         </div>
         <div class="sig-col">
             <div class="sig-space"></div>
-            <div class="sig-label-line">R. K. TRADERS<br />Proprietor</div>
+            <div class="sig-label">R. K. TRADERS<br />Proprietor</div>
         </div>
     </div>
 
-    <div class="mandatory-note">
-        Signature and company stamp is mandatory for registered companies
-    </div>
-
+    <div class="mandatory">Signature and company stamp is mandatory for registered companies</div>
 </body>
 
 </html>
