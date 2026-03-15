@@ -64,7 +64,21 @@ export default function FormViewer({ activeForm, documentId }) {
 
   function handleFieldChange(key, value) {
     if (isStatic) return
-    const updated = { ...fields, [key]: value }
+    let updated = { ...fields, [key]: value }
+
+    // When totalQty or weightApprox changes in Form5,
+    // sync to weight/quantity fields used by Form1 and other forms
+    if (key === 'weightApprox') {
+      updated.weight = value
+    }
+    if (key === 'totalQty') {
+      // Only update quantity if it's currently empty or was previously auto-set
+      if (!fields.quantity || fields._qtySynced) {
+        updated.quantity = value
+        updated._qtySynced = true
+      }
+    }
+
     setFields(updated)
     debouncedSave(updated)
   }
@@ -134,7 +148,7 @@ export default function FormViewer({ activeForm, documentId }) {
     <div className="w-full flex flex-col items-center gap-3 pb-12">
 
       {/* Meta bar */}
-      <div className="flex items-center gap-3 self-start w-[794px] max-w-full">
+      <div className="flex items-center gap-3 self-start w-[860px] max-w-full">
         <span className="font-mono text-[10px] text-muted uppercase tracking-widest">A4 Preview</span>
         <StatusBadge />
         {/* Reset button — only shown for editable forms that have been modified */}
@@ -150,15 +164,24 @@ export default function FormViewer({ activeForm, documentId }) {
 
       {/* Editable hint — shown only once for editable forms */}
       {isEditable && saveStatus === 'idle' && (
-        <div className="self-start w-[794px] max-w-full">
+        <div className="self-start w-[860px] max-w-full">
           <p className="text-[11px] text-muted">
             Click any field to edit. Changes are auto-saved to the database after you stop typing.
           </p>
         </div>
       )}
 
-      {/* A4 paper */}
-      <div className="w-[794px] min-h-[1123px] bg-white shadow-[0_4px_32px_rgba(0,0,0,0.5)] rounded-sm overflow-hidden animate-[fadeIn_0.2s_ease]">
+      {/* A4 paper — 794px wide, scaled up to fill available space */}
+      <div style={{
+        width: 794,
+        minHeight: 1123,
+        transformOrigin: 'top center',
+        boxShadow: '0 4px 32px rgba(0,0,0,0.5)',
+        borderRadius: 2,
+        overflow: 'hidden',
+        animation: 'fadeIn 0.2s ease',
+        background: '#fff',
+      }}>
         <FormComponent
           fields={fields}
           onChange={handleFieldChange}
