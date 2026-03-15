@@ -23,12 +23,14 @@ export default function Login() {
         setError('__ok__Account created. Please sign in.')
       } else {
         const res = await loginApi(email, password)
-        login(res.data.access_token, { email })
+        login(res.data.access_token, {
+          email,
+          is_admin: res.data.is_admin || false,
+        })
         navigate('/')
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong.')
-      console.log(err);
     } finally {
       setLoading(false)
     }

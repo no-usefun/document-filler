@@ -1,19 +1,44 @@
 import { useAuth } from '../services/auth.jsx'
 import { useNavigate } from 'react-router-dom'
 
+
 const FORMS = [
-  { id: 'form1', label: 'GST Declaration',     icon: '§', note: 'Pre-filled' },
-  { id: 'form2', label: 'SCOMET Letter',        icon: '⊠', note: 'Pre-filled' },
-  { id: 'form3', label: 'KYC Form',             icon: '✦', note: 'Static'    },
-  { id: 'form4', label: 'CHA Authorization',    icon: '⊞', note: 'Pre-filled' },
-  { id: 'form5', label: 'Packing Details',      icon: '↗', note: 'Pre-filled' },
+  { id: 'form1', label: 'GST Declaration',   icon: '§' },
+  { id: 'form2', label: 'SCOMET Letter',      icon: '⊠' },
+  { id: 'form3', label: 'KYC Form',           icon: '✦' },
+  { id: 'form4', label: 'CHA Authorization',  icon: '⊞' },
+  { id: 'form5', label: 'Packing Details',    icon: '↗' },
 ]
 
-export default function Sidebar({ activeForm, onSelectForm, documentId, onUploadClick, onHistoryClick, showHistory }) {
-  const { user, logout } = useAuth()
-  const navigate         = useNavigate()
+const BORDER_COLORS = {
+  sonauli: { dot: '#4a9e6b', label: 'Sonauli' },
+  raxaul:  { dot: '#5b8fd4', label: 'Raxaul' },
+}
+
+export default function Sidebar({ activeForm, onSelectForm, documentId, border,
+                                   onUploadClick, onHistoryClick, onImagesClick, activeView }) {
+  const { user, logout, isAdmin } = useAuth()
+  const navigate                  = useNavigate()
+  const bc                        = border ? BORDER_COLORS[border.id] : null
 
   function handleLogout() { logout(); navigate('/login') }
+
+  function NavItem({ id, label, icon, onClick, active, disabled, badge }) {
+    return (
+      <button
+        onClick={() => !disabled && onClick()}
+        disabled={disabled}
+        title={disabled ? 'Upload an XML file first' : label}
+        className={`sidebar-item ${active ? 'active' : ''} ${disabled ? 'opacity-30 cursor-not-allowed' : ''}`}
+      >
+        <span className="font-mono w-4 text-center flex-shrink-0 text-sm">{icon}</span>
+        <span className="flex-1 truncate text-[13px]">{label}</span>
+        {badge && <span className="text-[9px] px-1.5 py-0.5 rounded font-medium flex-shrink-0"
+          style={{ background: badge.bg, color: badge.color }}>{badge.text}</span>}
+        {active && <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />}
+      </button>
+    )
+  }
 
   return (
     <aside className="w-[220px] flex-shrink-0 bg-surface border-r border-border flex flex-col overflow-hidden">
@@ -28,49 +53,52 @@ export default function Sidebar({ activeForm, onSelectForm, documentId, onUpload
 
       {/* Upload button */}
       <div className="px-3 pt-3.5 pb-2">
-        <button
-          onClick={onUploadClick}
+        <button onClick={onUploadClick}
           className="w-full flex items-center gap-2 px-3 py-2 rounded text-sm font-medium text-accent
                      bg-accent-bg border border-accent-bd transition-colors
-                     hover:bg-amber-400/10 hover:border-accent-dim"
-        >
+                     hover:bg-amber-400/10 hover:border-accent-dim">
           <span className="font-mono text-base leading-none">↑</span>
           Upload XML
         </button>
       </div>
 
-      {/* Form nav */}
+      {/* Border badge */}
+      {border && bc && (
+        <div className="mx-3 mb-2 flex items-center gap-2 px-3 py-1.5 rounded bg-panel border border-border">
+          <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: bc.dot }} />
+          <span className="text-[11px] text-secondary flex-1 truncate">{bc.label} Border</span>
+          <span className="text-[9px] text-muted font-mono">active</span>
+        </div>
+      )}
+
+      {/* Editable Forms nav */}
       <div className="flex-1 overflow-y-auto pb-2">
-        <p className="section-label">Documents</p>
+        <p className="section-label">Editable Forms</p>
         <nav className="flex flex-col gap-0.5 px-2">
           {FORMS.map(f => (
-            <button
-              key={f.id}
-              onClick={() => documentId && onSelectForm(f.id)}
-              disabled={!documentId}
-              title={!documentId ? 'Upload an XML file first' : f.label}
-              className={`sidebar-item ${activeForm === f.id && !showHistory ? 'active' : ''} ${!documentId ? 'opacity-30 cursor-not-allowed' : ''}`}
-            >
-              <span className="font-mono w-4 text-center flex-shrink-0 text-sm">{f.icon}</span>
-              <span className="flex-1 truncate text-[13px]">{f.label}</span>
-              {activeForm === f.id && !showHistory && (
-                <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-              )}
-            </button>
+            <NavItem key={f.id} id={f.id} label={f.label} icon={f.icon}
+              onClick={() => onSelectForm(f.id)}
+              active={activeForm === f.id && activeView === 'forms'}
+              disabled={!documentId} />
           ))}
         </nav>
 
-        {/* History button */}
+        {/* Reference images section */}
+        <p className="section-label mt-2">Reference Images</p>
+        <div className="px-2">
+          <NavItem id="images" label="Scanned Docs" icon="⊡"
+            onClick={onImagesClick}
+            active={activeView === 'images'}
+            disabled={false} />
+        </div>
+
+        {/* Storage section */}
         <p className="section-label mt-2">Storage</p>
         <div className="px-2">
-          <button
+          <NavItem id="history" label="PDF History" icon="◷"
             onClick={onHistoryClick}
-            className={`sidebar-item w-full ${showHistory ? 'active' : ''}`}
-          >
-            <span className="font-mono w-4 text-center flex-shrink-0 text-sm">◷</span>
-            <span className="flex-1 truncate text-[13px]">PDF History</span>
-            {showHistory && <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />}
-          </button>
+            active={activeView === 'history'}
+            disabled={false} />
         </div>
       </div>
 
@@ -83,11 +111,16 @@ export default function Sidebar({ activeForm, onSelectForm, documentId, onUpload
           </div>
         )}
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full bg-accent-bg border border-accent-bd flex items-center justify-center
-                          text-[11px] font-semibold text-accent flex-shrink-0">
+          <div className="w-6 h-6 rounded-full bg-accent-bg border border-accent-bd flex items-center
+                          justify-center text-[11px] font-semibold text-accent flex-shrink-0">
             {user?.email?.[0]?.toUpperCase() ?? '?'}
           </div>
-          <span className="text-xs text-secondary flex-1 truncate">{user?.email}</span>
+          <div className="flex-1 min-w-0">
+            <span className="text-xs text-secondary truncate block">{user?.email}</span>
+            {isAdmin && (
+              <span className="text-[9px] text-accent font-mono">⊕ admin</span>
+            )}
+          </div>
           <button onClick={handleLogout} title="Sign out"
             className="text-muted text-sm transition-colors hover:text-danger flex-shrink-0">⏻</button>
         </div>
