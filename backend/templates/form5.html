@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .letterhead {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 16px;
+        }
+
+        .company-name {
+            font-size: 28px;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 2px;
+        }
+
+        .company-addr {
+            font-size: 11px;
+            margin-top: 4px;
+            line-height: 1.6;
+        }
+
+        .company-contact {
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .date-line {
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+
+        .to-block {
+            margin-bottom: 14px;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .subject-title {
+            text-align: center;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 13px;
+            margin: 14px 0 10px 0;
+        }
+
+        .body-text {
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        .invoice-ref {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .item-block {
+            margin: 10px 0 6px 30px;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .item-row {
+            font-weight: bold;
+        }
+
+        .item-sub {
+            margin-left: 30px;
+        }
+
+        .total-line {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 6px;
+            font-size: 12px;
+        }
+
+        .closing-text {
+            margin-top: 14px;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .sig-block {
+            margin-top: 14px;
+            font-size: 12px;
+        }
+
+        .sig-stamp-area {
+            margin-top: 70px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .sig-box {
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .sig-label {
+            font-size: 11px;
+            border-top: 1px solid #000;
+            padding-top: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="letterhead">
+        <div class="company-name">R . K . T R A D E R S</div>
+        <div class="company-addr">
+            219/B, OLD CHINA BAZAR STREET,<br />
+            1<sup>ST</sup> FLOOR, ROOM NO. – B<br />
+            KOLKATA – 700 001. (W.B.)
+        </div>
+        <div class="company-contact">
+            Phone No. – 0091– 33 – 46022533,<br />
+            Call No. – 0091 – 7044676599<br />
+            Email ID: – rkt_kol1977@yahoo.in
+        </div>
+    </div>
+
+    <div class="date-line">DATE: {{ invoiceDate or '' }}</div>
+
+    <div class="to-block">
+        M/S. {{ consignee or '' }}<br />
+        {{ consigneeAddress or '' }}
+    </div>
+
+    <div style="font-size:12px;margin-bottom:6px">Dear Sir,</div>
+
+    <div class="subject-title">PACKING DETAILS</div>
+
+    <div class="body-text">
+        <p>
+            TAX Invoice NO.
+            <span class="invoice-ref">{{ voucherNumber or '' }}</span>
+            DT. {{ invoiceDate or '' }} for IRs. <span class="invoice-ref">{{ totalAmount or '' }}/- only.</span>
+        </p>
+        <p style="font-weight:bold;text-decoration:underline;margin-top:4px">
+            TOTAL- {{ totalPackages or '' }}
+        </p>
+    </div>
+
+    <!-- Items list -->
+    <div class="item-block">
+        {% for item in items %}
+        <div class="item-row">
+            {{ "%02d" | format(loop.index) }}.) {{ item.quantity }} – {{ item.name }}
+            {% if item.description and item.description != item.name %}
+            – {{ item.description }}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="total-line">
+        TOTAL QTY. &amp; WEIGHT AS PER PACKING LIST
+    </div>
+
+    <div class="closing-text">
+        <p>
+            Please acknowledgement receipt and send us Custom clearance certificate along
+            with Bill of Export also for the same at your earliest.
+        </p>
+        <p style="margin-top:8px">
+            Thanking you and assuring to you our best services all the times, we are,<br />
+            Very truly yours,
+        </p>
+    </div>
+
+    <div class="sig-block">
+        <p style="font-weight:bold">For R. K. TRADERS</p>
+        <div class="sig-stamp-area">
+            <div class="sig-box">
+                <!-- generous space for signature and stamp -->
+                <div style="height:80px;"></div>
+                <div class="sig-label">Authorised Signatory</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

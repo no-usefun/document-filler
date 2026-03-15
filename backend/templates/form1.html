@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .outer {
+            border: 1px solid #000;
+            padding: 10px 14px;
+        }
+
+        h4 {
+            text-align: center;
+            margin: 0 0 2px 0;
+            font-size: 11px;
+            font-weight: normal;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 4px 0;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .rule {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 11px;
+        }
+
+        .serial-row {
+            text-align: right;
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+
+        .serial-val {
+            display: inline-block;
+            min-width: 80px;
+            border-bottom: 1px solid #000;
+        }
+
+        .opening {
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        td {
+            border: 1px solid #000;
+            padding: 5px 7px;
+            vertical-align: top;
+        }
+
+        .num {
+            width: 28px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .label {
+            width: 42%;
+        }
+
+        .val {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+
+        .decl {
+            margin-top: 10px;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .gst-inline {
+            display: inline-block;
+            min-width: 60px;
+            border-bottom: 1px solid #000;
+        }
+
+        .gst-inline-lg {
+            display: inline-block;
+            min-width: 160px;
+            border-bottom: 1px solid #000;
+            font-weight: bold;
+        }
+
+        .sig-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 40px;
+        }
+
+        .sig-right {
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .sig-box {
+            border-top: 1px solid #000;
+            margin-top: 60px;
+            padding-top: 4px;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .date-val {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 1px solid #000;
+        }
+
+        .note {
+            border-top: 1px solid #000;
+            margin-top: 14px;
+            padding-top: 6px;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+
+        <h4>THE WEST BENGAL VALUE ADDED TAX RULES, 2005 UNDER GST ACT, 2017</h4>
+        <h2>DECLARATION</h2>
+        <div class="rule">[ See Rule 107 (1) ]</div>
+
+        <div class="serial-row">
+            Serial No. <span class="serial-val">{{ serialNo or '' }}</span>
+        </div>
+
+        <p class="opening">
+            *I/We declare that the following consignment of goods is despatched from a place within West Bengal.
+        </p>
+
+        <table>
+            <tr>
+                <td class="num">1.</td>
+                <td class="label">Name, address and Income Tax Permanent Account No. (PAN) of the Consignor</td>
+                <td>
+                    <div class="val">{{ consignorDetails or '' }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="num">2.</td>
+                <td class="label">Name, address and Income Tax Permanent Account No. (PAN) of the Consignee</td>
+                <td>
+                    <div class="val">{{ consigneeDetails or '' }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="num">3.</td>
+                <td class="label">Place of Despatch</td>
+                <td>
+                    <div class="val">{{ placeOfDespatch or '' }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="num">4.</td>
+                <td class="label">Destination</td>
+                <td>
+                    <div class="val">{{ destination or '' }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="num">5.</td>
+                <td class="label">Description of goods</td>
+                <td>
+                    <div class="val">{{ descriptionOfGoods or '' }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="num">6.</td>
+                <td class="label">Quantity</td>
+                <td>
+                    <div class="val">{{ quantity or '' }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="num">7.</td>
+                <td class="label">Value and / or rate</td>
+                <td>
+                    <div class="val">{{ valueRate or '' }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="num">8.</td>
+                <td class="label">Weight</td>
+                <td>
+                    <div class="val">{{ weight or '' }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="num">9.</td>
+                <td class="label">Value and / or rate</td>
+                <td>
+                    <div class="val">{{ valueRate2 or '' }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="num">10.</td>
+                <td class="label">*Consignment Note or Delivery Note No. and Date of Challan No. and Date</td>
+                <td>
+                    <div class="val">{{ consignmentNote or '' }}</div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="decl">
+            <p>
+                *I/We declare that I/We* hold/do not hold GST Certificate of Registration bearing No.
+                <span class="gst-inline">{{ gstCertificateNumber or '' }}</span>
+                under the West Bengal Value Added Tax Act, 2003 (West Ben. Act....of 2003).
+                <strong>GST # <span class="gst-inline-lg">{{ consigneeGSTIN or '' }}</span></strong>
+            </p>
+            <p style="margin-top:6px">
+                *I/We* have/have not Manufactured the goods in West Bengal/not transported the goods from outside West
+                Bengal.
+            </p>
+            <p style="margin-top:6px">The above statement is true to the best of my/our knowledge and belief.</p>
+        </div>
+
+        <!-- Signature area with generous space for stamp -->
+        <div class="sig-area">
+            <div style="font-size:11px">
+                Date :- <span class="date-val">{{ invoiceDate or '' }}</span>
+            </div>
+            <div class="sig-right">
+                <div style="font-size:11px;font-weight:bold">{{ consignor or 'R. K. TRADERS' }}</div>
+                <div class="sig-box">Signature &amp; Status of the Declarant</div>
+            </div>
+        </div>
+
+        <div class="note">
+            <p>N.B. : (1) The declaration should bear a consecutive Serial No. issued by the officer at the consignor
+                giving the declaration and a true copy of the same should be retained by him.</p>
+            <p style="margin-top:4px">(2) *Strike out whichever is not applicable.</p>
+        </div>
+
+    </div>
+</body>
+
+</html>

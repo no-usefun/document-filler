@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .letterhead {
+            text-align: center;
+            border-bottom: 1px solid #000;
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+        }
+
+        .company-name {
+            font-size: 26px;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 3px;
+        }
+
+        .company-addr {
+            font-size: 11px;
+            margin-top: 3px;
+            line-height: 1.5;
+        }
+
+        .company-phone {
+            font-size: 10px;
+            text-decoration: underline;
+            margin-top: 2px;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .to-block {
+            line-height: 1.8;
+            font-size: 12px;
+        }
+
+        .to-name {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .date-right {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .re-line {
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .salutation {
+            margin-bottom: 8px;
+        }
+
+        .auth-line {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 160px;
+            border-bottom: 1px solid #000;
+        }
+
+        .blank-sm {
+            display: inline-block;
+            min-width: 80px;
+            border-bottom: 1px solid #000;
+        }
+
+        .bold-ul {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .details-block {
+            margin: 10px 0;
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        .details-block .detail-line {
+            display: flex;
+        }
+
+        .details-block .detail-label {
+            min-width: 200px;
+        }
+
+        .detail-val {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .closing {
+            margin-top: 10px;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .sig-area {
+            margin-top: 16px;
+            display: flex;
+            gap: 60px;
+            align-items: flex-end;
+            font-size: 11px;
+        }
+
+        .sig-col {
+            text-align: center;
+        }
+
+        .sig-space {
+            height: 75px;
+        }
+
+        .sig-label-line {
+            border-top: 1px solid #000;
+            padding-top: 3px;
+        }
+
+        .mandatory-note {
+            text-align: center;
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 12px;
+            border-top: 1px solid #000;
+            padding-top: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="letterhead">
+        <div class="company-name">R.K.TRADERS</div>
+        <div class="company-addr">
+            219/B, OLD CHINA BAZAR STREET<br />
+            KOLKATA – 700 001
+        </div>
+        <div class="company-phone">PHONE – 0091-7044676599 / 033-46018237</div>
+    </div>
+
+    <div class="header-row">
+        <div class="to-block">
+            To,<br />
+            The Assistant Commissioner,<br />
+            Land Custom station<br />
+            <span class="to-name">SONAULI, U.P.</span>
+        </div>
+        <div class="date-right">Date: {{ invoiceDate or '' }}</div>
+    </div>
+
+    <div class="re-line">RE: - CLEARING AGENT AUTHORIZATION LETTER</div>
+
+    <p class="salutation">Respected Sir / Ma'am,</p>
+
+    <div style="font-size:12px; line-height:2;">
+        <div class="auth-line">
+            We hereby authorize to Mr. <span class="blank"></span> (Custom House Agent)
+        </div>
+        <div class="auth-line">
+            CHA License No. , <span class="blank"></span> , SONAULI to carry out all
+        </div>
+        <div class="auth-line">
+            clearance of cargo along with all custom related work from Indian custom on behalf of
+        </div>
+        <div class="auth-line">
+            M/S. <span class="bold-ul">R.K.TRADERS</span> , IEC Code No. <span class="bold-ul">0206017863</span>
+        </div>
+    </div>
+
+    <div class="details-block">
+        <p style="margin-bottom:4px">The details of shipment will be as given below; : -</p>
+        <div class="detail-line">
+            <span class="detail-label">BL Number / LC No:-</span>
+        </div>
+        <div class="detail-line">
+            <span class="detail-label">Company Name:-</span>
+            <span class="detail-val">{{ consignee or '' }}</span>
+        </div>
+        <div class="detail-line">
+            <span class="detail-label">Invoice Number &amp; Date:-</span>
+            <span class="detail-val">{{ voucherNumber or '' }} DT. {{ invoiceDate or '' }}.</span>
+        </div>
+        <div class="detail-line">
+            <span class="detail-label">Quantity:-</span>
+            <span class="detail-val">{{ quantity or '' }}</span>
+        </div>
+        <div class="detail-line">
+            <span class="detail-label">Package:-</span>
+            <span class="detail-val">{{ descriptionOfGoods or '' }}</span>
+        </div>
+    </div>
+
+    <div class="closing">
+        <p>Please accord them with the necessary assistance for clearance of the goods.</p>
+        <p>Thank you for your co-operation,</p>
+    </div>
+
+    <div class="sig-area">
+        <div class="sig-col">
+            <div class="sig-space"></div>
+            <div class="sig-label-line">First Name Last Name<br />Designation<br /><strong>COMPANY STAMP</strong></div>
+        </div>
+        <div class="sig-col">
+            <div class="sig-space"></div>
+            <div class="sig-label-line">For R. K. TRADERS</div>
+        </div>
+        <div class="sig-col">
+            <div class="sig-space"></div>
+            <div class="sig-label-line">R. K. TRADERS<br />Proprietor</div>
+        </div>
+    </div>
+
+    <div class="mandatory-note">
+        Signature and company stamp is mandatory for registered companies
+    </div>
+
+</body>
+
+</html>
